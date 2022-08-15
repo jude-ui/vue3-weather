@@ -8,7 +8,10 @@
     <div class="inner_contain">
       <header v-if="location.length > 0">
         <span class="screen_out">현재 설정된 지역 : </span>
-        <button class="btn_region">
+        <button
+          class="btn_region"
+          :class="{on: active_region}"
+          @click="active_region = true">
           <div
             class="material-icons"
             aria-hidden="true">
@@ -22,13 +25,14 @@
 
       <div
         class="select"
-        v-if="0">
+        v-if="active_region">
         <ul
           class="list_select">
           <li
-            v-for="region in regions"
+            v-for="(region, idx) in regions"
             :key="region.key"
-            @click="click_si(region)">
+            :class="{on: idx === siTargetIdx}"
+            @click="click_si(region, idx)">
             {{ region.key }}
           </li>
         </ul>
@@ -36,9 +40,10 @@
           class="list_select"
           v-if="arrGu.length">
           <li
-            v-for="region in arrGu"
+            v-for="(region, idx) in arrGu"
             :key="region.key"
-            @click="click_gu(region)">
+            :class="{on: idx === guTargetIdx}"
+            @click="click_gu(region, idx)">
             {{ region.key }}
           </li>
         </ul>
@@ -46,12 +51,20 @@
           class="list_select"
           v-if="arrDong.length">
           <li
-            v-for="region in arrDong"
+            v-for="(region, idx) in arrDong"
             :key="region.key"
-            @click="click_dong(region)">
+            :class="{on: idx === dongTargetIdx}"
+            @click="click_dong(region, idx)">
             {{ region.key }}
           </li>
         </ul>
+        <button
+          type="button"
+          class="btn_search"
+          @click="updateWeather()"
+          style="display:block;margin:0 auto;font-size:16px;background:#ffcd00;padding:5px 10px;margin-top:5px">
+          조회
+        </button>
       </div>
 
       <Loader v-if="isLoadingTotalWeather" />
@@ -215,6 +228,14 @@ export default {
   components: {
     Loader
   },
+  data() {
+    return {
+      siTargetIdx: -1,
+      guTargetIdx: -1,
+      dongTargetIdx: -1,
+      active_region: false
+    }
+  },
   created() {
     this.getRegion()
     this.updateWeather()
@@ -255,6 +276,9 @@ export default {
     ...mapMutations('region', [
       'sortRegion'
     ]),
+    setRegion() {
+
+    },
     getRegion() {
       const storageSi = localStorage.getItem('si')
       const storageGu = localStorage.getItem('gu')
@@ -271,9 +295,13 @@ export default {
         })
       }
     },
-    click_si(region) {
+    click_si(region, idx) {
       if (this.isLoadingTotalWeather) return
       // 시 데이터 클릭
+      this.siTargetIdx = idx
+      this.guTargetIdx = -1
+      this.dongTargetIdx = -1
+      // this.active = true
       if (this.arrDong.length > 0) this.updateState({arrDong: []})
       this.updateState({
         si: region.key, // 선택한 시 데이터
@@ -285,9 +313,11 @@ export default {
         }))
       })
     },
-    click_gu(region) {
+    click_gu(region, idx) {
       if (this.isLoadingTotalWeather) return
       // 구 데이터 클릭
+      this.guTargetIdx = idx
+      this.dongTargetIdx = -1
       this.updateState({
         gu: region.key, // 선택한 구 데이터
         dong: '',
@@ -297,9 +327,10 @@ export default {
         })),
       })
     },
-    click_dong(region) {
+    click_dong(region, idx) {
       if (this.isLoadingTotalWeather) return
       // 동 데이터 클릭
+      this.dongTargetIdx = idx
       this.updateState({
         dong: region.key, // 선택한 동 데이터
         posRegion: region.value // 최종 동 좌표값 할당
@@ -320,6 +351,11 @@ export default {
         this.alertRegionSet() // 경고
         return
       }
+      if (this.arrDong.length > 0) this.updateState({
+        arrGu: [],
+        arrDong: []
+      })
+      this.active_region = false
       // 날씨 조회
       this.updateState({ isLoadingTotalWeather: true})
       console.log('조회', this.posRegion.x, this.posRegion.y)
@@ -328,7 +364,6 @@ export default {
       this.updateState({ isLoadingTotalWeather: false})
       this.saveStorage() // 지역 이름 및 좌표값, bg 설정 등 로컬 스토리지에 반영
     },
-    
   }
 }
 </script>

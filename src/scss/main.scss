@@ -227,12 +227,21 @@
 }
 .list_select{
   overflow:hidden;
-  border:1px solid red;
+  padding:5px 5px 0 5px;
+  border:1px solid royalblue;
   & + & {
     margin-top:5px;
   }
+  
   li {
     float:left;
+    margin-bottom:5px;
+    padding:5px;
+    border-radius: 2px;
     & + li{margin-left:10px;}
+    &.on{
+      background-color: #ffcd00;
+      color: #222;
+    }
   }
 }
