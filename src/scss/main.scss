@@ -225,23 +225,112 @@
     }
   }
 }
-.list_select{
-  overflow:hidden;
-  padding:5px 5px 0 5px;
-  border:1px solid royalblue;
-  & + & {
-    margin-top:5px;
-  }
-  
-  li {
-    float:left;
-    margin-bottom:5px;
-    padding:5px;
-    border-radius: 2px;
-    & + li{margin-left:10px;}
-    &.on{
-      background-color: #ffcd00;
-      color: #222;
+
+
+.dimmed_layer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background-color: #000;
+  opacity: .75;
+}
+
+.region_layer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:40px 20px;
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1010;
+  .inner_layer{
+    width: 1000px;
+    height: 100%;
+    padding: 21px 20px 19px;
+    border-radius: 4px;
+    color: #222;
+    background-color:#fff;
+    box-sizing: border-box;
+    .layer_head{
+      position: relative;
+      .tit_region{
+        display: block;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #222;
+        font-size: 24px;
+      }
+      .group_navi{
+        display: flex;
+        align-items: center;
+        margin:8px 0 0 -5px;
+        .txt_divide{
+          padding: 10px;
+          font-size: 16px;
+          line-height: 18px;
+        }
+        .btn_navi{
+          font-size: 16px;
+          line-height: 18px;
+          padding: 10px 5px;
+          white-space: nowrap;
+          & + .btn_navi{
+            margin-left: 10px;
+            &:before{
+              content: '>';
+            }
+          }
+        }
+      }
+
+    }
+    .layer_body{
+      overflow: auto;
+      height:calc(100% - 88px);
+
+      .list_region{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        margin-top:16px;
+        // border-top: 1px solid blue;
+        border-left: 1px solid blue;
+        li {
+          margin: -2px 0 0 -2px;
+          border: 2px solid #fff;
+          background-color: #f7f7f7;
+          box-sizing: border-box;
+          text-align: center;
+          .btn_region{
+            width: 100%;
+            height: 40px;
+            font-size: 16px;
+            color: #222;
+          }
+          &:hover, & + .on{
+            .btn_region{
+              border:2px solid #ffcd00;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+      .btn_select{
+        display:block;
+        height:40px;
+        margin:20px auto 0;
+        padding:0 15px;
+        border-radius: 4px;
+        font-size:16px;
+        color:#222;
+        background:#ffcd00;
+      }
     }
   }
 }
+

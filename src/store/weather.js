@@ -13,6 +13,7 @@ export default {
     posRegion: {x: 60, y: 127},
     arrGu: [],
     arrDong: [],
+    active_region: false,
     isLoadingCurrent: false,
     isLoadingShortTerm: false,
     isLoadingTotalWeather: false,
@@ -43,6 +44,13 @@ export default {
       Object.keys(payload).map(key => {
         state[key] = payload[key]
       })
+    },
+    alertRegionSet() {
+      if (!this.gu && !this.dong) {
+        console.log('gu, dong 둘다 없음');
+      } else if(!this.dong) {
+        console.log('dong만 없음');
+      }
     },
     saveStorage(state) {
       localStorage.setItem('si', JSON.stringify(state.si))
@@ -515,6 +523,29 @@ export default {
       })
     },
     
+    async updateWeather({ state, commit, dispatch}) {
+      if (state.isLoadingTotalWeather) return
+
+      if (!state.dong) {
+        commit('alertRegionSet') // 경고
+        return
+      }
+      if (state.arrDong.length > 0) commit('updateState', {
+        arrGu: [],
+        arrDong: []
+      })
+      if (state.active_region) {
+        state.active_region = false
+      }
+
+      // 날씨 조회
+      commit('updateState', { isLoadingTotalWeather: true})
+      console.log('조회', state.posRegion.x, state.posRegion.y)
+      await dispatch('fetchWeather') // 날씨 조회
+      console.log('조회 완료');
+      commit('updateState', { isLoadingTotalWeather: false})
+      commit('saveStorage') // 지역 이름 및 좌표값, bg 설정 등 로컬 스토리지에 반영
+    },
   },
 }
 

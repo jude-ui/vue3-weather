@@ -11,7 +11,7 @@
         <button
           class="btn_region"
           :class="{on: active_region}"
-          @click="active_region = true">
+          @click="updateState({ active_region: true})">
           <div
             class="material-icons"
             aria-hidden="true">
@@ -23,53 +23,10 @@
         </button>
       </header>
 
-      <div
-        class="select"
-        v-if="active_region">
-        <ul
-          class="list_select">
-          <li
-            v-for="(region, idx) in regions"
-            :key="region.key"
-            :class="{on: idx === siTargetIdx}"
-            @click="click_si(region, idx)">
-            {{ region.key }}
-          </li>
-        </ul>
-        <ul
-          class="list_select"
-          v-if="arrGu.length">
-          <li
-            v-for="(region, idx) in arrGu"
-            :key="region.key"
-            :class="{on: idx === guTargetIdx}"
-            @click="click_gu(region, idx)">
-            {{ region.key }}
-          </li>
-        </ul>
-        <ul
-          class="list_select"
-          v-if="arrDong.length">
-          <li
-            v-for="(region, idx) in arrDong"
-            :key="region.key"
-            :class="{on: idx === dongTargetIdx}"
-            @click="click_dong(region, idx)">
-            {{ region.key }}
-          </li>
-        </ul>
-        <button
-          type="button"
-          class="btn_search"
-          @click="updateWeather()"
-          style="display:block;margin:0 auto;font-size:16px;background:#ffcd00;padding:5px 10px;margin-top:5px">
-          조회
-        </button>
-      </div>
-
       <Loader v-if="isLoadingTotalWeather" />
       <template v-else>
         <main>
+          <SelectRegion /><!-- 지역 선택 -->
           <div v-if="errorMessageCurrent">
             {{ errorMessageCurrent }}
           </div>
@@ -221,71 +178,49 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapMutations, mapState, mapActions } from 'vuex'
 import Loader from '~/components/Loader'
+import SelectRegion from '~/components/SelectRegion'
 
 export default {
   components: {
-    Loader
-  },
-  data() {
-    return {
-      siTargetIdx: -1,
-      guTargetIdx: -1,
-      dongTargetIdx: -1,
-      active_region: false
-    }
+    Loader,
+    SelectRegion
   },
   created() {
     this.getRegion()
     this.updateWeather()
-    this.sortRegion()
   },
   computed: {
     ...mapState('weather', [
-      'si',
-      'gu',
-      'dong',
+      'active_region',
       'location',
-      'posRegion',
-      'arrGu',
-      'arrDong',
       'errorMessageCurrent',
       'errorMessageShortTerm',
       'weathersCurrent',
       'weathersShortTerm',
       'date',
-      'zeroPlus',
       'overallWeather',
       'icoOverallWeather',
-      'isLoadingCurrent',
-      'isLoadingShortTerm',
       'isLoadingTotalWeather',
       'currentRainAmount',
       'bgWeather',
-    ]),
-    ...mapState('region', [
-      'regions'
     ]),
   },
   methods: {
     ...mapMutations('weather', [
       'updateState',
-      'saveStorage',
     ]),
-    ...mapMutations('region', [
-      'sortRegion'
+    ...mapActions('weather', [
+      'updateWeather'
     ]),
-    setRegion() {
-
-    },
     getRegion() {
       const storageSi = localStorage.getItem('si')
       const storageGu = localStorage.getItem('gu')
       const storageDong = localStorage.getItem('dong')
       const storagePosRegion = localStorage.getItem('posRegion')
       const storageBgWeather = localStorage.getItem('bgWeather')
-      if (storageSi && storageGu && storageDong && storagePosRegion) {
+      if (storageSi && storageGu && storageDong && storagePosRegion && storageBgWeather) {
         this.updateState({
           si: JSON.parse(storageSi),
           gu: JSON.parse(storageGu),
@@ -294,75 +229,6 @@ export default {
           bgWeather: JSON.parse(storageBgWeather),
         })
       }
-    },
-    click_si(region, idx) {
-      if (this.isLoadingTotalWeather) return
-      // 시 데이터 클릭
-      this.siTargetIdx = idx
-      this.guTargetIdx = -1
-      this.dongTargetIdx = -1
-      // this.active = true
-      if (this.arrDong.length > 0) this.updateState({arrDong: []})
-      this.updateState({
-        si: region.key, // 선택한 시 데이터
-        gu: '',
-        dong: '',
-        arrGu: region.children.map(el => ({
-          key: el.key,
-          children: el.children
-        }))
-      })
-    },
-    click_gu(region, idx) {
-      if (this.isLoadingTotalWeather) return
-      // 구 데이터 클릭
-      this.guTargetIdx = idx
-      this.dongTargetIdx = -1
-      this.updateState({
-        gu: region.key, // 선택한 구 데이터
-        dong: '',
-        arrDong: region.children.map(el => ({
-          key: el.key,
-          value: el.value
-        })),
-      })
-    },
-    click_dong(region, idx) {
-      if (this.isLoadingTotalWeather) return
-      // 동 데이터 클릭
-      this.dongTargetIdx = idx
-      this.updateState({
-        dong: region.key, // 선택한 동 데이터
-        posRegion: region.value // 최종 동 좌표값 할당
-      })
-      console.log(this.posRegion.x, this.posRegion.y)
-    },
-    alertRegionSet() {
-      if (!this.gu && !this.dong) {
-        console.log('gu, dong 둘다 없음');
-      } else if(!this.dong) {
-        console.log('dong만 없음');
-      }
-    },
-    async updateWeather() {
-      if (this.isLoadingTotalWeather) return
-
-      if (!this.dong) {
-        this.alertRegionSet() // 경고
-        return
-      }
-      if (this.arrDong.length > 0) this.updateState({
-        arrGu: [],
-        arrDong: []
-      })
-      this.active_region = false
-      // 날씨 조회
-      this.updateState({ isLoadingTotalWeather: true})
-      console.log('조회', this.posRegion.x, this.posRegion.y)
-      await this.$store.dispatch('weather/fetchWeather') // 날씨 조회
-      console.log('조회 완료');
-      this.updateState({ isLoadingTotalWeather: false})
-      this.saveStorage() // 지역 이름 및 좌표값, bg 설정 등 로컬 스토리지에 반영
     },
   }
 }
