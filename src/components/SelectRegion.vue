@@ -46,7 +46,7 @@
               v-for="(region, idx) in regions"
               :key="region.key"
               :class="{on: idx === siTargetIdx}"
-              @click="click_si(region, idx)">
+              @click="selectSi(region, idx)">
               <button
                 type="button"
                 class="btn_region">
@@ -68,7 +68,7 @@
               v-for="(region, idx) in arrGu"
               :key="region.key"
               :class="{on: idx === guTargetIdx}"
-              @click="click_gu(region, idx)">
+              @click="selectGu(region, idx)">
               <button
                 type="button"
                 class="btn_region">
@@ -90,7 +90,7 @@
               v-for="(region, idx) in arrDong"
               :key="region.key"
               :class="{on: idx === dongTargetIdx}"
-              @click="click_dong(region, idx)">
+              @click="selectDong(region, idx)">
               <button
                 type="button"
                 class="btn_region">
@@ -169,7 +169,7 @@ export default {
     ]),
     
 
-    click_si(region, idx) {
+    selectSi(region, idx) {
       // 시 데이터 클릭
       if (this.isLoadingTotalWeather) return
 
@@ -188,7 +188,7 @@ export default {
       })
       this.txtSi = this.tempSi
     },
-    click_gu(region, idx) {
+    selectGu(region, idx) {
       if (this.isLoadingTotalWeather) return
       // 구 데이터 클릭
       this.guTargetIdx = idx
@@ -204,7 +204,7 @@ export default {
       })
       this.txtGu = this.tempGu
     },
-    click_dong(region, idx) {
+    selectDong(region, idx) {
       if (this.isLoadingTotalWeather) return
       // 동 데이터 클릭
       this.dongTargetIdx = idx

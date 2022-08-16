@@ -369,7 +369,7 @@ export default {
 
       let apiGetMinutes;
       if (payload === 'current') {
-        apiGetMinutes = 30
+        apiGetMinutes = 40
         baseMinutes = '00'
       } else if (payload === 'shortTerm') {
         apiGetMinutes = 30
