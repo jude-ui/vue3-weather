@@ -251,6 +251,7 @@
   bottom: 0;
   z-index: 1010;
   .inner_layer{
+    position: relative;
     width: 1000px;
     height: 100%;
     padding: 21px 20px 19px;
@@ -329,7 +330,19 @@
         font-size:16px;
         color:#222;
         background:#ffcd00;
+        &[disabled]{
+          opacity: .6;
+        }
       }
+    }
+    .btn_close{
+      position: absolute;
+      top: 0;
+      right: 0;
+      color:#000;
+      font-size: 20px;
+      padding:15px;
+      background-color: #ffcd00;
     }
   }
 }

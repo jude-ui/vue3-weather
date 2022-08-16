@@ -92,11 +92,18 @@
           <button
             type="button"
             class="btn_select"
+            :disabled="dongTargetIdx < 0"
             @click="updateWeather()">
             조회
           </button>
         </div>
         <div class="layer_foot">
+          <button
+            @click="closePopup()"
+            type="button"
+            class="btn_close">
+            닫기
+          </button>
         </div>
       </div>
     </div>
@@ -213,6 +220,23 @@ export default {
       this.txtDong = this.dong
       console.log(this.posRegion.x, this.posRegion.y)
     },
+    closePopup() {
+      this.txtSi = '시/도'
+      this.txtGu = '구/군'
+      this.txtDong = '읍/면/동'
+      this.siTargetIdx = -1
+      this.guTargetIdx = -1
+      this.dongTargetIdx = -1
+      this.activeSi = true
+      this.activeGu = false
+      this.activeDong = false
+      
+      this.updateState({
+        arrGu: [],
+        arrDong: [],
+        active_region: false
+      })
+    }
   }
 }
 </script>
