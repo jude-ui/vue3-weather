@@ -1,7 +1,8 @@
 <template>
   <div
     class="container"
-    :class="bgWeather">
+    :class="[bgWeather, {fixed_on: fixedClass}]"
+    :style="fixedStyle">
     <h1 class="screen_out">
       날씨 정보
     </h1>
@@ -21,12 +22,12 @@
             {{ location }}
           </div>
         </button>
+        <SelectRegion v-if="active_region" /><!-- 지역 선택 -->
       </header>
 
       <Loader v-if="isLoadingTotalWeather" />
       <template v-else>
         <main>
-          <SelectRegion /><!-- 지역 선택 -->
           <div v-if="errorMessageCurrent">
             {{ errorMessageCurrent }}
           </div>
@@ -187,6 +188,11 @@ export default {
     Loader,
     SelectRegion
   },
+  data() {
+    return {
+      testStyle: ''
+    }
+  },
   created() {
     this.getRegion()
     this.updateWeather()
@@ -205,6 +211,8 @@ export default {
       'isLoadingTotalWeather',
       'currentRainAmount',
       'bgWeather',
+      'fixedClass',
+      'fixedStyle',
     ]),
   },
   methods: {

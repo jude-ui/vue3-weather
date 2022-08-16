@@ -1,122 +1,118 @@
 <template>
-  <template v-if="active_region">
-    <div
-      class="dimmed_layer"
-      v-if="1"></div>
-    <div
-      @click.self="closePopup()"
-      class="region_layer"
-      v-if="1">
-      <div class="inner_layer">
-        <div class="layer_head">
-          <strong class="tit_region">지역 선택</strong>
-          <div class="group_navi">
-            <button
-              @click="backToSi()"
-              type="button"
-              class="btn_navi"
-              :class="{on: siTargetIdx > -1}"
-              :disabled="siTargetIdx < 0">
-              {{ txtSi }}
-            </button>
-            <span class="txt_divide">&gt;</span>
-            <button
-              @click="backToGu()"
-              type="button"
-              class="btn_navi"
-              :class="{on: guTargetIdx > -1}"
-              :disabled="guTargetIdx < 0">
-              {{ txtGu }}
-            </button>
-            <span class="txt_divide">&gt;</span>
-            <button
-              type="button"
-              class="btn_navi"
-              :class="{on: dongTargetIdx > -1}"
-              :disabled="dongTargetIdx < 0">
-              {{ txtDong }}
-            </button>
-          </div>
-        </div>
-        <div class="layer_body">
-          <ul
-            v-if="activeSi"
-            class="list_region">
-            <li
-              v-for="(region, idx) in regions"
-              :key="region.key"
-              :class="{on: idx === siTargetIdx}"
-              @click="selectSi(region, idx)">
-              <button
-                type="button"
-                class="btn_region">
-                {{ region.key }}
-              </button>
-            </li>
-          </ul>
-          <ul
-            v-if="activeGu"
-            class="list_region">
-            <li>
-              <button
-                class="btn_region fst"
-                @click="backToSi()">
-                ↑ 상위
-              </button>
-            </li>
-            <li
-              v-for="(region, idx) in arrGu"
-              :key="region.key"
-              :class="{on: idx === guTargetIdx}"
-              @click="selectGu(region, idx)">
-              <button
-                type="button"
-                class="btn_region">
-                {{ region.key }}
-              </button>
-            </li>
-          </ul>
-          <ul
-            v-if="activeDong"
-            class="list_region">
-            <li>
-              <button
-                class="btn_region fst"
-                @click="backToGu()">
-                ↑ 상위
-              </button>
-            </li>
-            <li
-              v-for="(region, idx) in arrDong"
-              :key="region.key"
-              :class="{on: idx === dongTargetIdx}"
-              @click="selectDong(region, idx)">
-              <button
-                type="button"
-                class="btn_region">
-                {{ region.key }}
-              </button>
-            </li>
-          </ul>
+  <div
+    class="dimmed_layer"></div>
+  <div
+    @click.self="closePopup()"
+    class="region_layer">
+    <div class="inner_layer">
+      <div class="layer_head">
+        <strong class="tit_region">지역 선택</strong>
+        <div class="group_navi">
           <button
+            @click="backToSi()"
             type="button"
-            class="btn_select"
-            :disabled="dongTargetIdx < 0"
-            @click="updateWeather('search')">
-            조회
+            class="btn_navi"
+            :class="{on: siTargetIdx > -1}"
+            :disabled="siTargetIdx < 0">
+            {{ txtSi }}
           </button>
-        </div>
-        <div class="layer_foot">
+          <span class="txt_divide">&gt;</span>
           <button
-            @click="closePopup()"
+            @click="backToGu()"
             type="button"
-            class="btn_close">
-            닫기
+            class="btn_navi"
+            :class="{on: guTargetIdx > -1}"
+            :disabled="guTargetIdx < 0">
+            {{ txtGu }}
+          </button>
+          <span class="txt_divide">&gt;</span>
+          <button
+            type="button"
+            class="btn_navi"
+            :class="{on: dongTargetIdx > -1}"
+            :disabled="dongTargetIdx < 0">
+            {{ txtDong }}
           </button>
         </div>
       </div>
+      <div class="layer_body">
+        <ul
+          v-if="activeSi"
+          class="list_region">
+          <li
+            v-for="(region, idx) in regions"
+            :key="region.key"
+            :class="{on: idx === siTargetIdx}"
+            @click="selectSi(region, idx)">
+            <button
+              type="button"
+              class="btn_region">
+              {{ region.key }}
+            </button>
+          </li>
+        </ul>
+        <ul
+          v-if="activeGu"
+          class="list_region">
+          <li>
+            <button
+              class="btn_region fst"
+              @click="backToSi()">
+              ↑ 상위
+            </button>
+          </li>
+          <li
+            v-for="(region, idx) in arrGu"
+            :key="region.key"
+            :class="{on: idx === guTargetIdx}"
+            @click="selectGu(region, idx)">
+            <button
+              type="button"
+              class="btn_region">
+              {{ region.key }}
+            </button>
+          </li>
+        </ul>
+        <ul
+          v-if="activeDong"
+          class="list_region">
+          <li>
+            <button
+              class="btn_region fst"
+              @click="backToGu()">
+              ↑ 상위
+            </button>
+          </li>
+          <li
+            v-for="(region, idx) in arrDong"
+            :key="region.key"
+            :class="{on: idx === dongTargetIdx}"
+            @click="selectDong(region, idx)">
+            <button
+              type="button"
+              class="btn_region">
+              {{ region.key }}
+            </button>
+          </li>
+        </ul>
+        <button
+          type="button"
+          class="btn_select"
+          :disabled="dongTargetIdx < 0"
+          @click="updateWeather('search')">
+          조회
+        </button>
+      </div>
+      <div class="layer_foot">
+        <button
+          @click="closePopup()"
+          type="button"
+          class="btn_close">
+          닫기
+        </button>
+      </div>
     </div>
-  </template>
+  </div>
 </template>
 
 <script>
@@ -138,6 +134,8 @@ export default {
   },
   created() {
     this.sortRegion()
+    this.screenFixed()
+    console.log('created');
   },
   computed: {
     ...mapState('weather', [
@@ -152,6 +150,9 @@ export default {
       'active_region',
       'posRegion',
       'tempPosRegion',
+      'fixedClass',
+      'fixedStyle',
+      'yOffset',
     ]),
     ...mapState('region', [
       'regions'
@@ -159,7 +160,8 @@ export default {
   },
   methods: {
     ...mapMutations('weather', [
-      'updateState'
+      'updateState',
+      'screenFixedRemove'
     ]),
     ...mapMutations('region', [
       'sortRegion'
@@ -167,8 +169,19 @@ export default {
     ...mapActions('weather', [
       'updateWeather',
     ]),
+    screenFixed() {
+      console.log(window.pageYOffset);
+      this.updateState({
+        fixedClass: true,
+        yOffset: window.pageYOffset,
+      })
+      if (this.yOffset > 0) {
+        this.updateState({
+          fixedStyle: `top: -${this.yOffset}px`
+        })
+      }
+    },
     
-
     selectSi(region, idx) {
       // 시 데이터 클릭
       if (this.isLoadingTotalWeather) return
@@ -248,7 +261,6 @@ export default {
       this.activeGu = false
       this.activeDong = false
       
-      
       this.updateState({
         arrGu: [],
         arrDong: [],
@@ -258,6 +270,7 @@ export default {
         tempPosRegion: {},
         active_region: false,
       })
+      this.screenFixedRemove()
     }
   }
 }

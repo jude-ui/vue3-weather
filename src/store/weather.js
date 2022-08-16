@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { nextTick } from 'vue'
 
 // const dateObj = new Date('January 1, 2022 00:40:00')
 const dateObj = new Date()
@@ -33,6 +34,9 @@ export default {
     shortTermBaseToday: '',
     currentBaseTime: '',
     shortTermBaseTime: '',
+    fixedClass: false,
+    fixedStyle: '',
+    yOffset: 0,
     date: {},
     zeroPlus(number) {
       const zeroPlus = `0${number}`
@@ -384,7 +388,14 @@ export default {
         baseHours = hours
       }
       state[`${payload}BaseTime`] = `${baseHours}${baseMinutes}`
-    }
+    },
+    screenFixedRemove(state) {
+      state.fixedStyle = ''
+      state.fixedClass = false
+      nextTick(() => {
+        window.scrollTo(0, state.yOffset)
+      })
+    },
   },
   actions: {
     // 현재 날씨
@@ -527,6 +538,7 @@ export default {
         state.gu = state.tempGu
         state.dong = state.tempDong
         state.posRegion = state.tempPosRegion
+        commit('screenFixedRemove')
       }
       if (state.active_region) {
         state.active_region = false
