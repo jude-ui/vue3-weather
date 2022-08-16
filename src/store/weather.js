@@ -49,13 +49,6 @@ export default {
         state[key] = payload[key]
       })
     },
-    alertRegionSet() {
-      if (!this.gu && !this.dong) {
-        console.log('gu, dong 둘다 없음');
-      } else if(!this.dong) {
-        console.log('dong만 없음');
-      }
-    },
     saveStorage(state) {
       localStorage.setItem('si', JSON.stringify(state.si))
       localStorage.setItem('gu', JSON.stringify(state.gu))
@@ -452,7 +445,7 @@ export default {
         })
         const { data } = await _fetchWeatherShortTerm(payload)
         const weatherData = data.response.body.items.item
-        console.log('초단기 원본 데이터', weatherData)
+        // console.log('초단기 원본 데이터', weatherData)
 
         const map = {}
         weatherData.forEach(info => {
@@ -488,8 +481,6 @@ export default {
         commit('isStatePTY') // 눈, 비 있는지 isStatePTY 값 생성
         commit('modifyCatePTY') // 강수형태값 치환
 
-        console.log(state.weathersShortTerm);
-        
         commit('eachCommonWeather') // 최종 날씨 문구 각 데이터에 추가
         commit('calcOverallWeather') // 현재 날씨 > state 할당
         commit('weatherBgApply') // 날씨에 따른 bg 적용
