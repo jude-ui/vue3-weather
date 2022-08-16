@@ -21,6 +21,8 @@
   &.bg_weather8{background-image: url(~/assets/bg8_snow_rain.jpg)}
   &.bg_weather9{background-image: url(~/assets/bg9_lightning.jpg)}
   .inner_contain{
+    display: flex;
+    flex-direction: column;
     max-width:1200px;
     margin: 0 auto;
     position: relative;
@@ -29,15 +31,20 @@
     color:#fff;
     box-sizing: border-box;
     header{
+      flex: none;
       display: flex;
       justify-content: flex-end;
       align-items: center;
       .btn_region{
         display: flex;
+        position: relative;
         padding:10px 0 10px 10px;
         color:rgba(255,255,255,.8);
         &:hover{
-          color:rgba(255,255,255,.6);
+          .txt_location{
+            text-decoration: underline;
+            color:rgba(255,255,255,.6);
+          }
         }
         .material-icons{
           // margin-top:-2px;
@@ -51,12 +58,14 @@
       }
     }
     main{
+      flex: none;
       .group_current{
         display: flex;
         justify-content: center;
         align-items: center;
         margin:40px 0 30px;
         .ico_weather{
+          flex: none;
           width: 100px;
           height: 100px;
           margin-right: 30px;
@@ -70,6 +79,7 @@
           &.ico_weather7{background-position: -240px -120px;}
         }
         .group_txt{
+          flex: none;
           opacity: .8;
           letter-spacing: -0.025em;
           font-size: 18px;
@@ -95,7 +105,10 @@
           line-height: 18px;
           color:rgba(255,255,255,.7);
           &:hover{
-            color:rgba(255,255,255,.5);
+            .txt_refresh{
+              color:rgba(255,255,255,.5);
+              text-decoration: underline;
+            }
           }
           .material-icons{
             font-size:18px;
@@ -199,6 +212,7 @@
       }
     }
     footer{
+      margin-top: auto;
       padding-top: 28px;
       text-align: center;
       opacity: .35;
@@ -271,14 +285,16 @@
         display: flex;
         align-items: center;
         margin:8px 0 0 -5px;
+        color:#ccc;
         .txt_divide{
-          padding: 10px;
+          padding: 12px 5px;
           font-size: 16px;
           line-height: 18px;
         }
         .btn_navi{
           font-size: 16px;
           line-height: 18px;
+          color:#ccc;
           padding: 10px 5px;
           white-space: nowrap;
           & + .btn_navi{
@@ -286,6 +302,10 @@
             &:before{
               content: '>';
             }
+          }
+          &.on{
+            font-weight: bold;
+            color:#0d3ad5;
           }
         }
       }
@@ -298,9 +318,7 @@
       .list_region{
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-        margin-top:16px;
-        // border-top: 1px solid blue;
-        border-left: 1px solid blue;
+        padding-top:16px;
         li {
           margin: -2px 0 0 -2px;
           border: 2px solid #fff;
@@ -313,7 +331,7 @@
             font-size: 16px;
             color: #222;
           }
-          &:hover, & + .on{
+          &:hover, &.on{
             .btn_region{
               border:2px solid #ffcd00;
               font-weight: bold;
@@ -339,10 +357,26 @@
       position: absolute;
       top: 0;
       right: 0;
-      color:#000;
-      font-size: 20px;
-      padding:15px;
-      background-color: #ffcd00;
+      font-size: 1px;
+      line-height: 0;
+      color: transparent;
+      width: 70px;
+      height: 70px;
+      &:before, &:after{
+        width: 40px;
+        height: 2px;
+        background-color: #222;
+        position: absolute;
+        margin-top: 30px;
+        top: 4px;
+        right: 14px;
+        transform: rotate(-45deg);
+        content:'';
+      }
+      &:after{
+        transform: rotate(45deg);
+        content:'';
+      }
     }
   }
 }

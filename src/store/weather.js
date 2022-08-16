@@ -9,8 +9,12 @@ export default {
     si: '서울특별시',
     gu: '종로구',
     dong: '청운효자동',
+    tempSi: '',
+    tempGu: '',
+    tempDong: '',
     location: '',
     posRegion: {x: 60, y: 127},
+    tempPosRegion: {},
     arrGu: [],
     arrDong: [],
     active_region: false,
@@ -253,7 +257,7 @@ export default {
       })
     },
     getSimpleTime(state) {
-      state.weathersShortTerm = state.weathersShortTerm.map((el, idx) => {
+      state.weathersShortTerm = state.weathersShortTerm.map(el => {
         let str;
         // console.log(el.targetTime);
         // 예를들어 '1700' 일 경우 앞에 2자리만 get
@@ -448,7 +452,7 @@ export default {
         })
         const { data } = await _fetchWeatherShortTerm(payload)
         const weatherData = data.response.body.items.item
-        // console.log('초단기 원본 데이터', weatherData)
+        console.log('초단기 원본 데이터', weatherData)
 
         const map = {}
         weatherData.forEach(info => {
@@ -481,10 +485,11 @@ export default {
         commit('rainCheck') // 강수량값 문자열 재수정
         commit('modifyCateVEC', state.weathersShortTerm) // 풍향값 치환
         commit('modifyCateSKY') // 운량값 치환
-        commit('modifyCatePTY') // 강수형태값 치환
-        
-        
         commit('isStatePTY') // 눈, 비 있는지 isStatePTY 값 생성
+        commit('modifyCatePTY') // 강수형태값 치환
+
+        console.log(state.weathersShortTerm);
+        
         commit('eachCommonWeather') // 최종 날씨 문구 각 데이터에 추가
         commit('calcOverallWeather') // 현재 날씨 > state 할당
         commit('weatherBgApply') // 날씨에 따른 bg 적용
@@ -523,17 +528,15 @@ export default {
       })
     },
     
-    async updateWeather({ state, commit, dispatch}) {
+    async updateWeather({ state, commit, dispatch}, payload) {
       if (state.isLoadingTotalWeather) return
 
-      if (!state.dong) {
-        commit('alertRegionSet') // 경고
-        return
+      if (payload === 'search') {
+        state.si = state.tempSi
+        state.gu = state.tempGu
+        state.dong = state.tempDong
+        state.posRegion = state.tempPosRegion
       }
-      if (state.arrDong.length > 0) commit('updateState', {
-        arrGu: [],
-        arrDong: []
-      })
       if (state.active_region) {
         state.active_region = false
       }

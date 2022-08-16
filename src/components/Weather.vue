@@ -11,7 +11,7 @@
         <button
           class="btn_region"
           :class="{on: active_region}"
-          @click="updateState({ active_region: true})">
+          @click="regionPopupOn()">
           <div
             class="material-icons"
             aria-hidden="true">
@@ -49,7 +49,7 @@
               <div
                 v-if="currentRainAmount.length > 0"
                 class="txt_rainfall">
-                강수량 : 80.0mm{{ currentRainAmount }}
+                강수량 : {{ currentRainAmount }}
               </div>
               <div class="txt_current">
                 {{ overallWeather }}
@@ -67,7 +67,7 @@
               type="button"
               class="btn_refresh"
               @click="updateWeather()">
-              날씨 정보 새로고침
+              <span class="txt_refresh">날씨 정보 새로고침</span>
               <span
                 class="material-icons">
                 autorenew
@@ -230,6 +230,12 @@ export default {
         })
       }
     },
+    regionPopupOn() {
+      if (this.isLoadingTotalWeather) return
+      this.updateState({
+        active_region: true
+      })
+    }
   }
 }
 </script>

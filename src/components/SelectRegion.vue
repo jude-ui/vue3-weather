@@ -4,6 +4,7 @@
       class="dimmed_layer"
       v-if="1"></div>
     <div
+      @click.self="closePopup()"
       class="region_layer"
       v-if="1">
       <div class="inner_layer">
@@ -11,20 +12,28 @@
           <strong class="tit_region">지역 선택</strong>
           <div class="group_navi">
             <button
+              @click="backToSi()"
               type="button"
-              class="btn_navi">
+              class="btn_navi"
+              :class="{on: siTargetIdx > -1}"
+              :disabled="siTargetIdx < 0">
               {{ txtSi }}
             </button>
             <span class="txt_divide">&gt;</span>
             <button
+              @click="backToGu()"
               type="button"
-              class="btn_navi">
+              class="btn_navi"
+              :class="{on: guTargetIdx > -1}"
+              :disabled="guTargetIdx < 0">
               {{ txtGu }}
             </button>
             <span class="txt_divide">&gt;</span>
             <button
               type="button"
-              class="btn_navi">
+              class="btn_navi"
+              :class="{on: dongTargetIdx > -1}"
+              :disabled="dongTargetIdx < 0">
               {{ txtDong }}
             </button>
           </div>
@@ -50,9 +59,9 @@
             class="list_region">
             <li>
               <button
-                class="btn_region"
+                class="btn_region fst"
                 @click="backToSi()">
-                상위
+                ↑ 상위
               </button>
             </li>
             <li
@@ -72,9 +81,9 @@
             class="list_region">
             <li>
               <button
-                class="btn_region"
+                class="btn_region fst"
                 @click="backToGu()">
-                상위
+                ↑ 상위
               </button>
             </li>
             <li
@@ -93,7 +102,7 @@
             type="button"
             class="btn_select"
             :disabled="dongTargetIdx < 0"
-            @click="updateWeather()">
+            @click="updateWeather('search')">
             조회
           </button>
         </div>
@@ -135,10 +144,14 @@ export default {
       'si',
       'gu',
       'dong',
+      'tempSi',
+      'tempGu',
+      'tempDong',
       'arrGu',
       'arrDong',
       'active_region',
       'posRegion',
+      'tempPosRegion',
     ]),
     ...mapState('region', [
       'regions'
@@ -154,43 +167,26 @@ export default {
     ...mapActions('weather', [
       'updateWeather',
     ]),
-    backToSi() {
-      this.activeGu = false
-      this.activeSi = true
-      this.siTargetIdx = -1
-      this.txtGu = '구/군'
-      this.txtSi = '시/도'
-      
-      this.updateState({ si: '' })
-    },
-    backToGu() {
-      this.activeDong = false
-      this.activeGu = true
-      this.guTargetIdx = -1
-      this.dongTargetIdx = -1
-      this.txtGu = '구/군'
-      this.txtDong = '읍/면/동'
-      
-      this.updateState({
-        gu: '',
-        dong: ''
-      })
-    },
+    
+
     click_si(region, idx) {
-      if (this.isLoadingTotalWeather) return
       // 시 데이터 클릭
+      if (this.isLoadingTotalWeather) return
+
+      // 지역 선택 클래스 처리
       this.siTargetIdx = idx
       this.activeSi = false
       this.activeGu = true
       
+      // 임시 데이터에 지역 저장 및 지역 목록 데이터 처리
       this.updateState({
-        si: region.key, // 선택한 시 데이터
+        tempSi: region.key, // 선택한 시 데이터
         arrGu: region.children.map(el => ({
           key: el.key,
           children: el.children
         }))
       })
-      this.txtSi = this.si
+      this.txtSi = this.tempSi
     },
     click_gu(region, idx) {
       if (this.isLoadingTotalWeather) return
@@ -200,13 +196,13 @@ export default {
       this.activeDong = true
       
       this.updateState({
-        gu: region.key, // 선택한 구 데이터
+        tempGu: region.key, // 선택한 구 데이터
         arrDong: region.children.map(el => ({
           key: el.key,
           value: el.value
         })),
       })
-      this.txtGu = this.gu
+      this.txtGu = this.tempGu
     },
     click_dong(region, idx) {
       if (this.isLoadingTotalWeather) return
@@ -214,12 +210,33 @@ export default {
       this.dongTargetIdx = idx
 
       this.updateState({
-        dong: region.key, // 선택한 동 데이터
-        posRegion: region.value // 최종 동 좌표값 할당
+        tempDong: region.key, // 선택한 동 데이터
+        tempPosRegion: region.value // 최종 동 좌표값 할당
       })
-      this.txtDong = this.dong
+      this.txtDong = this.tempDong
       console.log(this.posRegion.x, this.posRegion.y)
     },
+
+    backToSi() {
+      this.txtSi = '시/도'
+      this.txtGu = '구/군'
+      this.txtDong = '읍/면/동'
+      this.activeSi = true
+      this.activeGu = false
+      this.activeDong = false
+      this.siTargetIdx = -1
+      this.guTargetIdx = -1
+      this.dongTargetIdx = -1
+    },
+    backToGu() {
+      this.txtGu = '구/군'
+      this.txtDong = '읍/면/동'
+      this.activeDong = false
+      this.activeGu = true
+      this.guTargetIdx = -1
+      this.dongTargetIdx = -1
+    },
+
     closePopup() {
       this.txtSi = '시/도'
       this.txtGu = '구/군'
@@ -231,10 +248,15 @@ export default {
       this.activeGu = false
       this.activeDong = false
       
+      
       this.updateState({
         arrGu: [],
         arrDong: [],
-        active_region: false
+        tempSi: '',
+        tempGu: '',
+        tempDong: '',
+        tempPosRegion: {},
+        active_region: false,
       })
     }
   }
