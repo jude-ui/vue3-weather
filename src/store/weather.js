@@ -538,7 +538,7 @@ export default {
         state.gu = state.tempGu
         state.dong = state.tempDong
         state.posRegion = state.tempPosRegion
-        commit('screenFixedRemove')
+        
       }
       if (state.active_region) {
         state.active_region = false
@@ -551,6 +551,9 @@ export default {
       console.log('조회 완료');
       commit('updateState', { isLoadingTotalWeather: false})
       commit('saveStorage') // 지역 이름 및 좌표값, bg 설정 등 로컬 스토리지에 반영
+      if (payload === 'search') {
+        commit('screenFixedRemove')
+      }
     },
   },
 }
