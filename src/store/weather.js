@@ -538,7 +538,6 @@ export default {
         state.gu = state.tempGu
         state.dong = state.tempDong
         state.posRegion = state.tempPosRegion
-        
       }
       if (state.active_region) {
         state.active_region = false
