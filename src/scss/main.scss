@@ -419,11 +419,11 @@ html, body{
   [class*='skeleton_']{
     height: 30px;
     border-radius: 4px;
-    background-color: #c7c7c7;
-    background: -moz-linear-gradient(left, #c7c7c7 0px, #dcdcdc 21px, #f4f4f4 49px, #dcdcdc 80px, #c7c7c7 100px);
-    background: -webkit-linear-gradient(left, #c7c7c7 0px, #dcdcdc 21px, #f4f4f4 49px, #dcdcdc 80px, #c7c7c7 100px);
-    background: linear-gradient(to right, #c7c7c7 0px, #dcdcdc 21px, #f4f4f4 49px, #dcdcdc 80px, #c7c7c7 100px);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c7c7c7', endColorstr='#c7c7c7',GradientType=1 );
+    background-color: #e2e2e2;
+    background: -moz-linear-gradient(left, #e2e2e2 0px, #e8e8e8 21px, #ffffff 49px, #e8e8e8 80px, #e2e2e2 100px);
+    background: -webkit-linear-gradient(left, #e2e2e2 0px, #e8e8e8 21px, #ffffff 49px, #e8e8e8 80px, #e2e2e2 100px);
+    background: linear-gradient(to right, #e2e2e2 0px, #e8e8e8 21px, #ffffff 49px, #e8e8e8 80px, #e2e2e2 100px);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#e2e2e2',GradientType=1 );
     background-size: 480px;
     animation: bgAni1 .9s linear infinite;
   }
@@ -447,13 +447,13 @@ html, body{
       width: 100px;
       height: 100px;
       margin-right: 30px;
-      border-radius: 8px;
+      // border-radius: 8px;
     }
     .group_skeletons{
       .skeleton_txt1{
         width: 130px;
         height: 50px;
-        border-radius: 6px;
+        // border-radius: 6px;
       }
       .skeleton_txt2{
         width: 100px;
@@ -477,7 +477,7 @@ html, body{
     }
     .skeleton_box1, .skeleton_box2, .skeleton_box3{
       width: 100%;
-      border-radius: 6px;
+      // border-radius: 6px;
       background-size: 680px;
       animation: bgAni2 .9s linear infinite;
     }
@@ -548,14 +548,6 @@ html, body{
     }
   }
 }
-
-
-
-
-
-
-
-
 
 @media
 only screen and (max-width:767px){
