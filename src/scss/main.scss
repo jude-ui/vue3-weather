@@ -425,6 +425,7 @@ html, body{
     background: linear-gradient(to right, #e2e2e2 0px, #e8e8e8 21px, #ffffff 49px, #e8e8e8 80px, #e2e2e2 100px);
     background-size: 480px;
     animation: bgAni1 .9s linear infinite;
+    opacity: .45;
   }
   .location_skeleton{
     display: flex;
