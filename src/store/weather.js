@@ -289,6 +289,7 @@ export default {
           str = el.targetDate.slice(-4)
           str = [str.slice(0,2), bar, str.slice(-2)].join('')  
         }
+
         if (el.targetDate.slice(-2) == state.date.date) {
           // 오늘이면
           el.targetDate = `${str}(${state.getDay(state.date.day)})`
@@ -495,7 +496,7 @@ export default {
         commit('eachCommonWeather') // 최종 날씨 문구 각 데이터에 추가
         commit('calcOverallWeather') // 현재 날씨 > state 할당
         commit('weatherBgApply') // 날씨에 따른 bg 적용
-        commit('currentAmountOfRain') // 비일 경우 state.test에 강수량값 할당
+        commit('currentAmountOfRain') // 비일 경우 state.currentRainAmount에 강수량값 할당
         commit('weatherImgMatch') // 현재 날씨 분기
         commit('calcIcoOverallWeather') // 현재 날씨 아이콘 치환
         
