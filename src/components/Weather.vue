@@ -7,26 +7,26 @@
       날씨 정보
     </h1>
     <div class="inner_contain">
-      <header v-if="location.length > 0">
-        <span class="screen_out">현재 설정된 지역 : </span>
-        <button
-          class="btn_region"
-          :class="{on: active_region}"
-          @click="regionPopupOn()">
-          <div
-            class="material-icons"
-            aria-hidden="true">
-            location_on
-          </div>
-          <div class="txt_location">
-            {{ location }}
-          </div>
-        </button>
-        <SelectRegion v-if="active_region" /><!-- 지역 선택 -->
-      </header>
-
       <Loader v-if="isLoadingTotalWeather" />
       <template v-else>
+        <header v-if="location.length > 0">
+          <span class="screen_out">현재 설정된 지역 : </span>
+          <button
+            class="btn_region"
+            :class="{on: active_region}"
+            @click="regionPopupOn()">
+            <div
+              class="material-icons"
+              aria-hidden="true">
+              location_on
+            </div>
+            <div class="txt_location">
+              {{ location }}
+            </div>
+          </button>
+          <SelectRegion v-if="active_region" /><!-- 지역 선택 -->
+        </header>
+        <!-- // header -->
         <main>
           <div v-if="errorMessageCurrent">
             {{ errorMessageCurrent }}
@@ -156,7 +156,7 @@
             </div>
           </div>
         </main>
-
+        <!-- // main -->
         <footer>
           <p class="info_data">
             본 페이지는 기상청에서 제공하는 데이터로 여러 정보들을 나타내고 있습니다.<br />
@@ -172,10 +172,12 @@
             </a>
           </small>
         </footer>
+        <!-- // footer -->
       </template>
     </div>
     <!-- // inner_contain -->
   </div>
+  <!-- // container -->
 </template>
 
 <script>
