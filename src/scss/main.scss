@@ -1,3 +1,6 @@
+html, body{
+  height:100%;
+}
 .fixed_on{
   position: fixed;
   top: 0;
@@ -29,11 +32,11 @@
   .inner_contain{
     display: flex;
     flex-direction: column;
-    max-width:1200px;
-    margin: 0 auto;
     position: relative;
+    max-width:1200px;
     min-height: 100vh;
-    padding:15px 10px;
+    margin: 0 auto;
+    padding:10px;
     color:#fff;
     box-sizing: border-box;
     header{
@@ -231,7 +234,7 @@
     }
     footer{
       margin-top: auto;
-      padding-top: 28px;
+      padding: 40px 0 25px;
       text-align: center;
       opacity: .35;
       word-break: keep-all;
@@ -274,7 +277,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding:40px 20px;
+  padding:20px;
   overflow: auto;
   position: fixed;
   top: 0;
@@ -367,6 +370,7 @@
       }
       .btn_select{
         display:block;
+        width: 70px;
         height:40px;
         margin:20px auto 0;
         padding:0 15px;
@@ -402,6 +406,73 @@
       &:after{
         transform: rotate(45deg);
         content:'';
+      }
+    }
+  }
+}
+@media
+only screen and (max-width:767px){
+  .container{
+    .inner_contain{
+      main{
+        .group_current{
+          margin: 10px 0 25px;
+        }
+        .box_weather{
+          &:before{
+            top: 80px;
+          }
+          &:after{
+            top: 213px;
+          }
+          .info_clamp{
+            .txt_clamp1{
+              margin-top: 20px;
+            }
+            .txt_clamp2{
+              margin-top: 1px;
+            }
+            .txt_clamp3{
+              margin-top: 82px;
+            }
+            .txt_clamp4{
+              margin-top: 9px;
+            }
+            .txt_clamp5, .txt_clamp6, .txt_clamp7{
+              line-height: 1.4;
+            }
+            .txt_clamp5{
+              margin-top: 28px;
+            }
+            .txt_clamp6{
+              margin-top: 1px;
+            }
+            .txt_clamp7{
+              margin-top: 1px;
+            }
+          }
+          .info_weather{
+            padding:10px 20px;
+            .list_weather{
+              li{
+                font-size: 13px;
+                .ico_weather{
+                  margin-top: 25px;
+                }
+                .txt_time{
+                  font-size: 14px;
+                }
+                .txt_weather{
+                  font-size: 14px;
+                }
+                .txt_temp{
+                  margin-bottom:25px;
+                  font-size: 24px;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
