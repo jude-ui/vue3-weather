@@ -560,7 +560,8 @@ export default {
 
 // 초단기 실황 데이터(현재 날씨)
 function _fetchWeatherCurrent(payload) {
-  const { WEATHER_API_KEY } = process.env
+  // const { WEATHER_API_KEY } = process.env
+  const { WEATHER_API_KEY } = 'Oe7qTMkfNw6IVyS9kgTdlZjClo6w3woVvcQua6t7Tb2ONrqmOkTgb8eZxu6ZhPWUMIBkmBxShFQqQqVU6J9RSw'
   const { baseDate, baseTime, nX, nY } = payload
 
   const url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=${WEATHER_API_KEY}%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nX}&ny=${nY}`
@@ -581,9 +582,10 @@ function _fetchWeatherCurrent(payload) {
 
 // 초단기 예보 데이터(추후 5 or 6시간)
 function _fetchWeatherShortTerm(payload) {
-  const { WEATHER_API_KEY } = process.env
+  // const { WEATHER_API_KEY } = process.env
+  const { WEATHER_API_KEY } = 'Oe7qTMkfNw6IVyS9kgTdlZjClo6w3woVvcQua6t7Tb2ONrqmOkTgb8eZxu6ZhPWUMIBkmBxShFQqQqVU6J9RSw'
   const { baseDate, baseTime, nX, nY } = payload
-  
+
   const url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${WEATHER_API_KEY}%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nX}&ny=${nY}`
 
   return new Promise((resolve, reject) => {
