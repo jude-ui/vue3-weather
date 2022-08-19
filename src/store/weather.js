@@ -562,6 +562,7 @@ export default {
 function _fetchWeatherCurrent(payload) {
   const { WEATHER_API_KEY } = process.env
   const { baseDate, baseTime, nX, nY } = payload
+
   const url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=${WEATHER_API_KEY}%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nX}&ny=${nY}`
 
   return new Promise((resolve, reject) => {
@@ -582,6 +583,7 @@ function _fetchWeatherCurrent(payload) {
 function _fetchWeatherShortTerm(payload) {
   const { WEATHER_API_KEY } = process.env
   const { baseDate, baseTime, nX, nY } = payload
+  
   const url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${WEATHER_API_KEY}%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nX}&ny=${nY}`
 
   return new Promise((resolve, reject) => {
