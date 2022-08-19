@@ -32,7 +32,7 @@ module.exports = {
   // 결과물(번들)을 반환하는 설정
   output: {
     // 주석은 기본값!, `__dirname`은 현재 파일의 위치를 알려주는 NodeJS 전역 변수
-    path: path.resolve(__dirname, 'docs'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'main.js',
     clean: true
   },
