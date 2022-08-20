@@ -72,7 +72,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            plugins: production
+            plugins: !production
             ? ['transform-remove-console']
             : []
           }
