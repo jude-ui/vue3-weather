@@ -565,6 +565,10 @@ only screen and (max-width:767px){
       main{
         .group_current{
           margin: 10px 0 25px;
+          .group_txt{
+            font-size: 15px;
+            line-height: 22px;
+          }
         }
         .box_weather{
           &:before{
