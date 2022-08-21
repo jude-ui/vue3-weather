@@ -438,7 +438,7 @@ export default {
       } catch ({message}) {
         console.log('현재 날씨 데이터 에러', message)
         commit('updateState', {
-          errorMessageCurrent: `현재 날씨 데이터 에러: ${message}`
+          errorMessageCurrent: `현재 날씨 데이터 에러 입니다. 새로고침을 하거나 관리자에게 문의해 주세요. (jude.sh@daum.net): ${message}`
         })
       } finally {
         console.log('Current - Done');
@@ -504,7 +504,7 @@ export default {
       } catch (message) {
         console.log('초단기 날씨 데이터 에러', message);
         commit('updateState', {
-          errorMessageShortTerm: `초단기 날씨 데이터 에러: ${message}`
+          errorMessageShortTerm: `초단기 날씨 데이터 에러 입니다, 새로고침을 하거나 관리자에게 문의해 주세요. (jude.sh@daum.net) : ${message}`
         })
       } finally {
         console.log('ShortTerm - Done');

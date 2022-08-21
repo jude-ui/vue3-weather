@@ -11,7 +11,6 @@ const CopyPlugin = _require('copy-webpack-plugin')
 const { VueLoaderPlugin } = _require('vue-loader')
 const Dotenv = _require('dotenv-webpack')
 const webpack = require("webpack")
-const production = process.env.NODE_ENV === 'production'
 
 module.exports = {
   resolve: {
