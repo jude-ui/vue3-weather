@@ -49,14 +49,7 @@ html, body{
         position: relative;
         padding:10px 0 10px 10px;
         color:rgba(255,255,255,.8);
-        &:hover{
-          .txt_location{
-            text-decoration: underline;
-            color:rgba(255,255,255,.6);
-          }
-        }
         .material-icons{
-          // margin-top:-2px;
           font-size:22px;
           vertical-align: top;
         }
@@ -113,12 +106,6 @@ html, body{
           font-size:14px;
           line-height: 18px;
           color:rgba(255,255,255,.7);
-          &:hover{
-            .txt_refresh{
-              color:rgba(255,255,255,.5);
-              text-decoration: underline;
-            }
-          }
           .material-icons{
             font-size:18px;
             margin-top: -1px;
@@ -255,6 +242,7 @@ html, body{
           padding:2px 5px;
           color: #fff;
           vertical-align: top;
+          text-decoration: none;
         }
       }
     }
@@ -277,7 +265,7 @@ html, body{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding:20px;
+  padding: 20px;
   overflow: auto;
   position: fixed;
   top: 0;
@@ -334,6 +322,7 @@ html, body{
     .layer_body{
       overflow: auto;
       height:calc(100% - 92px);
+      
       .list_region{
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -348,11 +337,9 @@ html, body{
           .btn_region{
             display: block;
             position: static;
-            padding: 0;
             width: 100%;
-            padding:9px 0 8px;
+            padding: 9px 0 8px;
             font-size: 14px;
-            line-height: 18px;
             color: #222;
             &.fst{
               font-weight: bold;
@@ -425,6 +412,7 @@ html, body{
     background: linear-gradient(to right, #e2e2e2 0px, #e8e8e8 21px, #ffffff 49px, #e8e8e8 80px, #e2e2e2 100px);
     background-size: 480px;
     animation: bgAni1 .9s linear infinite;
+    // opacity: .45;
   }
   .location_skeleton{
     display: flex;
@@ -630,16 +618,51 @@ only screen and (max-width:767px){
 
 @media
 only screen and (min-width:768px){
-  .region_layer{
-    .inner_layer{
-      .layer_body{
-        .list_region{
-          li{
+  .container{
+    .inner_contain{
+      header{
+        .btn_region{
+          &:hover{
+            .txt_location{
+              text-decoration: underline;
+              color:rgba(255,255,255,.6);
+            }
+          }
+        }
+      }
+      main{
+        .info_refresh{
+          .btn_refresh{
             &:hover{
-              position: relative;
-              border-color:#ffcd00;
-              .btn_region{
-                font-weight: bold;
+              .txt_refresh{
+                color:rgba(255,255,255,.5);
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+      footer{
+        small{
+          .link_author{
+            &:hover{
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+    .region_layer{
+      .inner_layer{
+        .layer_body{
+          .list_region{
+            li{
+              &:hover{
+                position: relative;
+                border-color:#ffcd00;
+                .btn_region{
+                  font-weight: bold;
+                }
               }
             }
           }
