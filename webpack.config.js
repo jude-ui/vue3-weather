@@ -59,23 +59,16 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/, // 제외할 경로
-        use: [
-          'babel-loader'
-        ]
-      },
-      {
-        test: /\.(png|jpe?g|gif|webp)$/,
-        use: 'file-loader'
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/, // 제외할 경로
         use: {
           loader: 'babel-loader',
           options: {
             plugins: removeConsole
           }
         }
+      },
+      {
+        test: /\.(png|jpe?g|gif|webp)$/,
+        use: 'file-loader'
       },
     ]
   },
