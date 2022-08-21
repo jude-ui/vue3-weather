@@ -512,6 +512,8 @@ export default {
       }
     },
     async fetchWeather({state, commit, dispatch}) {
+      state.bgWeather = ''
+
       commit('baseToday', 'current')
       commit('baseTime', 'current')
       await dispatch('initWeatherCurrent', {
