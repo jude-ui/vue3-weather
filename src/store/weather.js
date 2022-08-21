@@ -403,7 +403,7 @@ export default {
     async initWeatherCurrent({state, commit}, payload) {
       try {
         if (state.isLoadingCurrent) return
-        console.log('Current - Start');
+        // console.log('Current - Start');
         commit('updateState', {
           isLoadingCurrent: true,
           errorMessageCurrent: ''
@@ -450,7 +450,7 @@ export default {
     async initWeatherShortTerm({state, commit}, payload) {
       try {
         if (state.isLoadingShortTerm) return
-        console.log('ShortTerm - Start');
+        // console.log('ShortTerm - Start');
         commit('updateState', {
           isLoadingShortTerm: true,
           errorMessageShortTerm: ''

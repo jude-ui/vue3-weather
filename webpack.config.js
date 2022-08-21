@@ -78,17 +78,17 @@ module.exports = {
       ]
     }),
     new VueLoaderPlugin(),
+    new Dotenv(),
     new webpack.DefinePlugin({
       __VUE_OPTIONS_API__: true,
       __VUE_PROD_DEVTOOLS__: false
     }),
-    new Dotenv(),
   ],
 
   // 개발 서버 옵션
   devServer: {
     host: 'localhost',
-    port: 8080,
+    port: 8079,
     hot: true
   }
 }
