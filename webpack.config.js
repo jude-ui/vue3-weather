@@ -12,9 +12,6 @@ const { VueLoaderPlugin } = _require('vue-loader')
 const Dotenv = _require('dotenv-webpack')
 const webpack = require("webpack")
 
-const production = process.env.NODE_ENV === 'production'
-const removeConsole = production ? ['transform-remove-console'] : []
-
 module.exports = {
   resolve: {
     // 경로에서 확장자 생략 설정
@@ -65,7 +62,9 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            plugins: removeConsole
+            plugins: process.env.NODE_ENV === 'production'
+              ? ['transform-remove-console']
+              : []
           }
         }
       },
@@ -83,11 +82,11 @@ module.exports = {
       ]
     }),
     new VueLoaderPlugin(),
-    new Dotenv(),
     new webpack.DefinePlugin({
       __VUE_OPTIONS_API__: true,
       __VUE_PROD_DEVTOOLS__: false
-    })
+    }),
+    new Dotenv(),
   ],
 
   // 개발 서버 옵션
