@@ -403,7 +403,6 @@ export default {
     async initWeatherCurrent({state, commit}, payload) {
       try {
         if (state.isLoadingCurrent) return
-        console.log('Current - Start');
         commit('updateState', {
           isLoadingCurrent: true,
           errorMessageCurrent: ''
@@ -438,7 +437,7 @@ export default {
       } catch (message) {
         console.log('현재 날씨 데이터 에러', message)
         commit('updateState', {
-          errorMessageCurrent: `현재 날씨 데이터 에러: ${message}`
+          errorMessageCurrent: `현재 날씨 데이터 에러 입니다. 새로고침하거나 관리자에게 문의해 주세요. (jude.sh@daum.net) : ${message}`
         })
       } finally {
         console.log('Current - Done');
@@ -450,7 +449,6 @@ export default {
     async initWeatherShortTerm({state, commit}, payload) {
       try {
         if (state.isLoadingShortTerm) return
-        console.log('ShortTerm - Start');
         commit('updateState', {
           isLoadingShortTerm: true,
           errorMessageShortTerm: ''
@@ -504,7 +502,7 @@ export default {
       } catch (message) {
         console.log('초단기 날씨 데이터 에러', message);
         commit('updateState', {
-          errorMessageShortTerm: `초단기 날씨 데이터 에러: ${message}`
+          errorMessageShortTerm: `초단기 날씨 데이터 에러 입니다. 새로고침하거나 관리자에게 문의해 주세요. (jude.sh@daum.net) : ${message}`
         })
       } finally {
         console.log('ShortTerm - Done');

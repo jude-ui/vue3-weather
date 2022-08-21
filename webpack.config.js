@@ -13,8 +13,6 @@ const CopyPlugin = _require('copy-webpack-plugin')
 const { VueLoaderPlugin } = _require('vue-loader')
 const Dotenv = _require('dotenv-webpack')
 
-const production = process.env.NODE_ENV === 'production'
-
 module.exports = {
   resolve: {
     // 경로에서 확장자 생략 설정
@@ -65,18 +63,6 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|webp)$/,
         use: 'file-loader'
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/, // 제외할 경로
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: production
-            ? ['transform-remove-console']
-            : []
-          }
-        }
       },
     ]
   },
