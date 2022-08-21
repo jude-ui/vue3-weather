@@ -1,8 +1,6 @@
 // 현재 프로젝트에서 모듈 경로를 찾을 수 있도록 지정.
 // 특히 Windows에서 발생하는 오류 해결을 위한 코드.
 
-const webpack = require("webpack")
-
 // 이 코드가 없어도 잘 동작하는 경우 필요치 않음.
 const _require = id => require(require.resolve(id, { paths: [require.main.path] }))
 
@@ -12,6 +10,7 @@ const HtmlPlugin = _require('html-webpack-plugin')
 const CopyPlugin = _require('copy-webpack-plugin')
 const { VueLoaderPlugin } = _require('vue-loader')
 const Dotenv = _require('dotenv-webpack')
+const webpack = require("webpack")
 
 const production = process.env.NODE_ENV === 'production'
 const removeConsole = production ? ['transform-remove-console'] : []
@@ -57,6 +56,10 @@ module.exports = {
         ]
       },
       {
+        test: /\.(png|jpe?g|gif|webp)$/,
+        use: 'file-loader'
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/, // 제외할 경로
         use: {
@@ -65,10 +68,6 @@ module.exports = {
             plugins: removeConsole
           }
         }
-      },
-      {
-        test: /\.(png|jpe?g|gif|webp)$/,
-        use: 'file-loader'
       },
     ]
   },
