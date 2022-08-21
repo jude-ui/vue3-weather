@@ -289,7 +289,7 @@ html, body{
     position: relative;
     width: 1000px;
     height: 100%;
-    padding: 21px 20px 19px;
+    padding: 15px;
     border-radius: 4px;
     color: #222;
     background-color:#fff;
@@ -334,10 +334,9 @@ html, body{
     .layer_body{
       overflow: auto;
       height:calc(100% - 88px);
-
       .list_region{
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         padding-top:16px;
         border-left: 2px solid transparent;
         li {
@@ -351,8 +350,9 @@ html, body{
             position: static;
             padding: 0;
             width: 100%;
-            height: 40px;
-            font-size: 16px;
+            padding:9px 0 8px;
+            font-size: 14px;
+            line-height: 18px;
             color: #222;
             &.fst{
               font-weight: bold;
@@ -387,19 +387,19 @@ html, body{
       position: absolute;
       top: 0;
       right: 0;
+      width: 60px;
+      height: 60px;
       font-size: 1px;
       line-height: 0;
       color: transparent;
-      width: 70px;
-      height: 70px;
       &:before, &:after{
-        width: 40px;
+        width: 35px;
         height: 2px;
         background-color: #222;
         position: absolute;
         margin-top: 30px;
-        top: 4px;
-        right: 14px;
+        top: -3px;
+        right: 11px;
         transform: rotate(-45deg);
         content:'';
       }
@@ -552,6 +552,15 @@ html, body{
 @media
 only screen and (max-width:767px){
   .container{
+    .region_layer {
+      .inner_layer{
+        .layer_body{
+          .list_region{
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr))
+          }
+        }
+      }
+    }
     .inner_contain{
       main{
         .group_current{

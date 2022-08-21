@@ -45,7 +45,6 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "babel-plugin-transform-remove-console": "^6.9.4",
     "lodash": "^4.17.21",
     "vue": "^3.2.37",
     "vuex": "^4.0.2"

@@ -60,14 +60,9 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/, // 제외할 경로
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: !production
-              ? ['transform-remove-console']
-              : []
-          }
-        }
+        use: [
+          'babel-loader'
+        ]
       },
     ]
   },
