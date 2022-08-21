@@ -49,14 +49,7 @@ html, body{
         position: relative;
         padding:10px 0 10px 10px;
         color:rgba(255,255,255,.8);
-        &:hover{
-          .txt_location{
-            text-decoration: underline;
-            color:rgba(255,255,255,.6);
-          }
-        }
         .material-icons{
-          // margin-top:-2px;
           font-size:22px;
           vertical-align: top;
         }
@@ -113,12 +106,6 @@ html, body{
           font-size:14px;
           line-height: 18px;
           color:rgba(255,255,255,.7);
-          &:hover{
-            .txt_refresh{
-              color:rgba(255,255,255,.5);
-              text-decoration: underline;
-            }
-          }
           .material-icons{
             font-size:18px;
             margin-top: -1px;
@@ -255,6 +242,7 @@ html, body{
           padding:2px 5px;
           color: #fff;
           vertical-align: top;
+          text-decoration: none;
         }
       }
     }
@@ -630,16 +618,51 @@ only screen and (max-width:767px){
 
 @media
 only screen and (min-width:768px){
-  .region_layer{
-    .inner_layer{
-      .layer_body{
-        .list_region{
-          li{
+  .container{
+    .inner_contain{
+      header{
+        .btn_region{
+          &:hover{
+            .txt_location{
+              text-decoration: underline;
+              color:rgba(255,255,255,.6);
+            }
+          }
+        }
+      }
+      main{
+        .info_refresh{
+          .btn_refresh{
             &:hover{
-              position: relative;
-              border-color:#ffcd00;
-              .btn_region{
-                font-weight: bold;
+              .txt_refresh{
+                color:rgba(255,255,255,.5);
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+      footer{
+        small{
+          .link_author{
+            &:hover{
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+    .region_layer{
+      .inner_layer{
+        .layer_body{
+          .list_region{
+            li{
+              &:hover{
+                position: relative;
+                border-color:#ffcd00;
+                .btn_region{
+                  font-weight: bold;
+                }
               }
             }
           }
