@@ -62,9 +62,9 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            plugins: process.env.NODE_ENV === 'production'
+            plugins: (process.env.NODE_ENV === 'production'
               ? ['transform-remove-console']
-              : []
+              : [])
           }
         }
       },
