@@ -222,7 +222,8 @@ export default {
       'updateState',
     ]),
     ...mapActions('weather', [
-      'updateWeather'
+      'updateWeather',
+      'initCurrentDust'
     ]),
     getRegion() {
       const storageSi = localStorage.getItem('si')

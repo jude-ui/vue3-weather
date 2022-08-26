@@ -400,6 +400,11 @@ export default {
     },
   },
   actions: {
+    // 미세먼지
+    async initCurrentDust({state}, payload) {
+      const { data } = await _fetchDust(payload)
+      console.log('미세먼지 데이터', data.response.body.items)
+    },
     // 현재 날씨
     async initWeatherCurrent({state, commit}, payload) {
       try {

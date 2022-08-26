@@ -154,7 +154,11 @@ html, body{
           display: flex;
           overflow:auto;
           margin-left:60px;
-          padding:15px 20px;
+          padding:15px 0 15px 20px;
+          &:after{
+            padding-right: 20px;
+            content: '';
+          }
           .list_weather {
             flex: 1;
             display: flex;
@@ -592,7 +596,8 @@ only screen and (max-width:767px){
             }
           }
           .info_weather{
-            padding:10px 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
             .list_weather{
               li{
                 font-size: 13px;
