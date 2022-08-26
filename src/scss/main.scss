@@ -151,6 +151,7 @@ html, body{
           .txt_clamp7{margin-top: 2px;}
         }
         .info_weather{
+          display: flex;
           overflow:auto;
           margin-left:60px;
           padding:15px 20px;
