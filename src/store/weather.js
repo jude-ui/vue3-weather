@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { nextTick } from 'vue'
+import _sortBy from 'lodash/sortBy'
 
-// const dateObj = new Date('January 1, 2022 00:40:00')
+// const dateObj = new Date('August 25, 2022 20:34:00')
 const dateObj = new Date()
 
 export default {
@@ -460,14 +461,15 @@ export default {
         // console.log('초단기 원본 데이터', weatherData)
 
         const map = {}
-        weatherData.forEach(info => {
+        weatherData.forEach((info, idx) => {
           const step = {
             today: info.baseDate,
             baseTime: info.baseTime,
             targetDate: info.fcstDate,
             targetTime: info.fcstTime,
             nx: info.nx,
-            ny: info.ny
+            ny: info.ny,
+            idx
           }
           step["cate" + info.category] = info.fcstValue
           
@@ -480,7 +482,7 @@ export default {
             Object.assign(map[info.fcstTime], step)
           }
         })
-        state.weathersShortTerm = Object.values(map)
+        state.weathersShortTerm = _sortBy(Object.values(map), 'idx')
         if (state.date.minutes >= 0 && state.date.minutes < 30) {
           state.weathersShortTerm.shift()
         }

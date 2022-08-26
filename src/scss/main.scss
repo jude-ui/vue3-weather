@@ -156,6 +156,7 @@ html, body{
           margin-left:60px;
           padding:15px 20px;
           .list_weather {
+            flex: 1;
             display: flex;
             min-width:540px;
             justify-content: space-between;
