@@ -467,7 +467,7 @@ export default {
             targetTime: info.fcstTime,
             nx: info.nx,
             ny: info.ny,
-            idx: idx
+            idx
           }
           step["cate" + info.category] = info.fcstValue
           
