@@ -170,7 +170,6 @@ export default {
       'updateWeather',
     ]),
     screenFixed() {
-      console.log(window.pageYOffset);
       this.updateState({
         fixedClass: true,
         yOffset: window.pageYOffset,
@@ -227,7 +226,6 @@ export default {
         tempPosRegion: region.value // 최종 동 좌표값 할당
       })
       this.txtDong = this.tempDong
-      console.log(this.posRegion.x, this.posRegion.y)
     },
 
     backToSi() {
