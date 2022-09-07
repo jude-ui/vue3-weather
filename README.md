@@ -21,6 +21,8 @@ $ npm run dev
 - PostCSS
 - Autoprefixer
 - ESLint
+- axios
+- Lodash
 
 ## Packages
 
@@ -50,6 +52,11 @@ __autoprefixer__: 스타일에 자동으로 공급 업체 접두사(Vendor prefi
 
 __vue__: Vue.js 프레임워크<br>
 __@vue/compiler-sfc__: .vue 파일(SFC, 3버전)을 해석<br>
+__vuex__: Vue의 중앙 집중식 데이터 저장소 기능<br>
+
+__axios__: HTTP 클라이언트 라이브러리로 기상청 데이터를 요청하기 위해 사용<br>
+
+__lodash__: 다양한 유틸리티 기능을 제공하는 자바스크립트 라이브러리<br>
 
 __eslint__: 정적 코드 분석 도구 __(+ESLint)__<br>
 __eslint-plugin-vue__: Vue.js 코드 분석 __(+ESLint)__<br>
