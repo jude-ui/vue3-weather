@@ -190,11 +190,6 @@ export default {
     Loader,
     SelectRegion
   },
-  data() {
-    return {
-      testStyle: ''
-    }
-  },
   created() {
     this.getRegion()
     this.updateWeather()
